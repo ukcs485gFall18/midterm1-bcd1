@@ -37,25 +37,16 @@ class Item: NSObject, NSCoding {
   let uuid: UUID
   let majorValue: CLBeaconMajorValue
   let minorValue: CLBeaconMinorValue
-    
-    var beacon: CLBeacon? // Stores the last CLBeacon instance seen for this specific item
+  var beacon: CLBeacon?
   
-    init(name: String, icon: Int, uuid: UUID, majorValue: Int, minorValue: Int) {
-        self.name = name
-        self.icon = icon
-        self.uuid = uuid
-        self.majorValue = CLBeaconMajorValue(majorValue)
-        self.minorValue = CLBeaconMinorValue(minorValue)
-    }
-    
-    func asBeaconRegion() -> CLBeaconRegion { // Returns a new CLBeaconRegion instance from current item
-        return CLBeaconRegion(proximityUUID: uuid,
-                              major: majorValue,
-                              minor: minorValue,
-                              identifier: name)
-    }
-    
-    
+  init(name: String, icon: Int, uuid: UUID, majorValue: Int, minorValue: Int) {
+    self.name = name
+    self.icon = icon
+    self.uuid = uuid
+    self.majorValue = CLBeaconMajorValue(majorValue)
+    self.minorValue = CLBeaconMinorValue(minorValue)
+  }
+
   // MARK: NSCoding
   required init(coder aDecoder: NSCoder) {
     let aName = aDecoder.decodeObject(forKey: ItemConstant.nameKey) as? String
@@ -76,37 +67,45 @@ class Item: NSObject, NSCoding {
     aCoder.encode(Int(majorValue), forKey: ItemConstant.majorKey)
     aCoder.encode(Int(minorValue), forKey: ItemConstant.minorKey)
   }
+
+  func asBeaconRegion() -> CLBeaconRegion {
+    return CLBeaconRegion(proximityUUID: uuid,
+                          major: majorValue,
+                          minor: minorValue,
+                          identifier: name)
+  }
+  
+  func locationString() -> String {
+    guard let beacon = beacon else { return "Location: Unknown" }
+    let proximity = nameForProximity(beacon.proximity)
+    let accuracy = String(format: "%.2f", beacon.accuracy)
     
-    func nameForProximity(_ proximity: CLProximity) -> String {
-        switch proximity {
-        case .unknown:
-            return "Unknown"
-        case .immediate:
-            return "Immediate"
-        case .near:
-            return "Near"
-        case .far:
-            return "Far"
-        }
+    var location = "Location: \(proximity)"
+    if beacon.proximity != .unknown {
+      location += " (approx. \(accuracy)m)"
     }
     
-    func locationString() -> String {
-        guard let beacon = beacon else { return "Location: Unknown" }
-        let proximity = nameForProximity(beacon.proximity)
-        let accuracy = String(format: "%.2f", beacon.accuracy)
-        
-        var location = "Location: \(proximity)"
-        if beacon.proximity != .unknown {
-            location += " (approx. \(accuracy)m)"
-        }
-        
-        return location
+    return location
+  }
+  
+  func nameForProximity(_ proximity: CLProximity) -> String {
+    switch proximity {
+    case .unknown:
+      return "Unknown"
+    case .immediate:
+      return "Immediate"
+    case .near:
+      return "Near"
+    case .far:
+      return "Far"
     }
+  }
   
 }
 
-func ==(item: Item, beacon: CLBeacon) -> Bool { // Compares Item and Beacon: a CLBeacon is equal to an Item if the UUID, major, and minor values are all equal
+func ==(item: Item, beacon: CLBeacon) -> Bool {
     return ((beacon.proximityUUID.uuidString == item.uuid.uuidString)
         && (Int(beacon.major) == Int(item.majorValue))
         && (Int(beacon.minor) == Int(item.minorValue)))
 }
+

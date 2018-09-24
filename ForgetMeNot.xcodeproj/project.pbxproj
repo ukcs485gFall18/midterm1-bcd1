@@ -16,6 +16,9 @@
 		C00360971E3EA88F00234FCD /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00360961E3EA88F00234FCD /* IconCell.swift */; };
 		FB9CC95C1AD701910038DF33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9CC95B1AD701910038DF33 /* AppDelegate.swift */; };
 		FB9CC9631AD701910038DF33 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB9CC9621AD701910038DF33 /* Images.xcassets */; };
+		FB9CC97C1AD701CF0038DF33 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9CC97B1AD701CF0038DF33 /* CoreGraphics.framework */; };
+		FB9CC97E1AD701DA0038DF33 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9CC97D1AD701DA0038DF33 /* UIKit.framework */; };
+		FB9CC9801AD701E60038DF33 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9CC97F1AD701E60038DF33 /* Foundation.framework */; };
 		FB9CC98A1AD702CC0038DF33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB9CC9891AD702CC0038DF33 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +45,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB9CC9801AD701E60038DF33 /* Foundation.framework in Frameworks */,
+				FB9CC97E1AD701DA0038DF33 /* UIKit.framework in Frameworks */,
+				FB9CC97C1AD701CF0038DF33 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +314,7 @@
 				INFOPLIST_FILE = ForgetMeNot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.ForgetMeNotBCD;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.ForgetMeNotFinal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -322,7 +328,7 @@
 				INFOPLIST_FILE = ForgetMeNot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.ForgetMeNotBCD;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.ForgetMeNotFinal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

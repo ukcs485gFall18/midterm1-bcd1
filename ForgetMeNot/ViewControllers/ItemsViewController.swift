@@ -26,40 +26,27 @@ import CoreLocation
 let storedItemsKey = "storedItems"
 
 class ItemsViewController: UIViewController {
-	let locationManager = CLLocationManager() // Use CLLocationManager instance as your entry point into Core Location
-    
-    func startMonitoringItem(_ item: Item) {    // Start monitoring a given region and start ranging iBeacons within that region
-        let beaconRegion = item.asBeaconRegion()
-        locationManager.startMonitoring(for: beaconRegion)
-        locationManager.startRangingBeacons(in: beaconRegion)
-    }
-    
-    func stopMonitoringItem(_ item: Item) { // Reverses the effects of startMonitoringItem(_:)
-        let beaconRegion = item.asBeaconRegion()
-        locationManager.stopMonitoring(for: beaconRegion)
-        locationManager.stopRangingBeacons(in: beaconRegion)
-    }
-    
+	
   @IBOutlet weak var tableView: UITableView!
   
   var items = [Item]()
+  let locationManager = CLLocationManager()
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        locationManager.requestAlwaysAuthorization()
-        loadItems()
-        
-        locationManager.delegate = self
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    locationManager.delegate = self
+    locationManager.requestAlwaysAuthorization()
+    
+    loadItems()
+  }
   
   func loadItems() {
     guard let storedItems = UserDefaults.standard.array(forKey: storedItemsKey) as? [Data] else { return }
     for itemData in storedItems {
       guard let item = NSKeyedUnarchiver.unarchiveObject(with: itemData) as? Item else { continue }
       items.append(item)
-      
-        startMonitoringItem(item)
+      startMonitoringItem(item)
     }
   }
   
@@ -71,6 +58,18 @@ class ItemsViewController: UIViewController {
     }
     UserDefaults.standard.set(itemsData, forKey: storedItemsKey)
     UserDefaults.standard.synchronize()
+  }
+
+  func startMonitoringItem(_ item: Item) {
+    let beaconRegion = item.asBeaconRegion()
+    locationManager.startMonitoring(for: beaconRegion)
+    locationManager.startRangingBeacons(in: beaconRegion)
+  }
+  
+  func stopMonitoringItem(_ item: Item) {
+    let beaconRegion = item.asBeaconRegion()
+    locationManager.stopMonitoring(for: beaconRegion)
+    locationManager.stopRangingBeacons(in: beaconRegion)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -115,12 +114,13 @@ extension ItemsViewController : UITableViewDataSource {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     
     if editingStyle == .delete {
+      stopMonitoringItem(items[indexPath.row])
+      
       tableView.beginUpdates()
       items.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .automatic)
       tableView.endUpdates()
       
-        stopMonitoringItem(items[indexPath.row])
       persistItems()
     }
   }
@@ -139,38 +139,38 @@ extension ItemsViewController: UITableViewDelegate {
   }
 }
 
-// MARK: - CLLocationManagerDelegate
+// MARK: CLLocationManagerDelegate
 extension ItemsViewController: CLLocationManagerDelegate {
-    // Log any errors as a result of monitoring iBeacons
-    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-        print("Failed monitoring region: \(error.localizedDescription)")
-    }
+  func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+    print("Failed monitoring region: \(error.localizedDescription)")
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    print("Location manager failed: \(error.localizedDescription)")
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location manager failed: \(error.localizedDescription)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-        
-        // Find the same beacons in the table.
-        var indexPaths = [IndexPath]()
-        for beacon in beacons {
-            for row in 0..<items.count {
-                if items[row] == beacon { // Determine if item is equal to ranged beacon
-                    items[row].beacon = beacon
-                    indexPaths += [IndexPath(row: row, section: 0)]
-                }
-            }
+    // Find the same beacons in the table.
+    var indexPaths = [IndexPath]()
+    for beacon in beacons {
+      for row in 0..<items.count {
+        if items[row] == beacon {
+          items[row].beacon = beacon
+          indexPaths += [IndexPath(row: row, section: 0)]
         }
-        
-        // Update beacon locations of visible rows.
-        if let visibleRows = tableView.indexPathsForVisibleRows {
-            let rowsToUpdate = visibleRows.filter { indexPaths.contains($0) }
-            for row in rowsToUpdate {
-                let cell = tableView.cellForRow(at: row) as! ItemCell
-                cell.refreshLocation()
-            }
-        }
+      }
     }
     
+    // Update beacon locations of visible rows.
+    if let visibleRows = tableView.indexPathsForVisibleRows {
+      let rowsToUpdate = visibleRows.filter { indexPaths.contains($0) }
+      for row in rowsToUpdate {
+        let cell = tableView.cellForRow(at: row) as! ItemCell
+        cell.refreshLocation()
+      }
+    }
+    
+  }
 }
+
