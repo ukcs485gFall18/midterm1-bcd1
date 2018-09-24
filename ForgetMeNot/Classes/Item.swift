@@ -45,7 +45,14 @@ class Item: NSObject, NSCoding {
         self.majorValue = CLBeaconMajorValue(majorValue)
         self.minorValue = CLBeaconMinorValue(minorValue)
     }
-
+    
+    func asBeaconRegion() -> CLBeaconRegion { // Returns a new CLBeaconRegion instance from current item
+        return CLBeaconRegion(proximityUUID: uuid,
+                              major: majorValue,
+                              minor: minorValue,
+                              identifier: name)
+    }
+    
   // MARK: NSCoding
   required init(coder aDecoder: NSCoder) {
     let aName = aDecoder.decodeObject(forKey: ItemConstant.nameKey) as? String

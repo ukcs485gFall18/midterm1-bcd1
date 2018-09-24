@@ -28,6 +28,12 @@ let storedItemsKey = "storedItems"
 class ItemsViewController: UIViewController {
 	let locationManager = CLLocationManager() // Use CLLocationManager instance as your entry point into Core Location
     
+    func startMonitoringItem(_ item: Item) {    // Start monitoring a given region and start ranging iBeacons within that region
+        let beaconRegion = item.asBeaconRegion()
+        locationManager.startMonitoring(for: beaconRegion)
+        locationManager.startRangingBeacons(in: beaconRegion)
+    }
+    
   @IBOutlet weak var tableView: UITableView!
   
   var items = [Item]()
@@ -36,8 +42,9 @@ class ItemsViewController: UIViewController {
         super.viewDidLoad()
         
         locationManager.requestAlwaysAuthorization()
-        
         loadItems()
+        
+        locationManager.delegate = self
     }
   
   func loadItems() {
@@ -123,3 +130,6 @@ extension ItemsViewController: UITableViewDelegate {
   }
 }
 
+// MARK: - CLLocationManagerDelegate
+extension ItemsViewController: CLLocationManagerDelegate {
+}
