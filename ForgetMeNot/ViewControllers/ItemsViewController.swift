@@ -141,4 +141,36 @@ extension ItemsViewController: UITableViewDelegate {
 
 // MARK: - CLLocationManagerDelegate
 extension ItemsViewController: CLLocationManagerDelegate {
+    // Log any errors as a result of monitoring iBeacons
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print("Failed monitoring region: \(error.localizedDescription)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location manager failed: \(error.localizedDescription)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        
+        // Find the same beacons in the table.
+        var indexPaths = [IndexPath]()
+        for beacon in beacons {
+            for row in 0..<items.count {
+                if items[row] == beacon { // Determine if item is equal to ranged beacon
+                    items[row].beacon = beacon
+                    indexPaths += [IndexPath(row: row, section: 0)]
+                }
+            }
+        }
+        
+        // Update beacon locations of visible rows.
+        if let visibleRows = tableView.indexPathsForVisibleRows {
+            let rowsToUpdate = visibleRows.filter { indexPaths.contains($0) }
+            for row in rowsToUpdate {
+                let cell = tableView.cellForRow(at: row) as! ItemCell
+                cell.refreshLocation()
+            }
+        }
+    }
+    
 }

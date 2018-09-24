@@ -37,6 +37,8 @@ class Item: NSObject, NSCoding {
   let uuid: UUID
   let majorValue: CLBeaconMajorValue
   let minorValue: CLBeaconMinorValue
+    
+    var beacon: CLBeacon? // Stores the last CLBeacon instance seen for this specific item
   
     init(name: String, icon: Int, uuid: UUID, majorValue: Int, minorValue: Int) {
         self.name = name
@@ -52,6 +54,7 @@ class Item: NSObject, NSCoding {
                               minor: minorValue,
                               identifier: name)
     }
+    
     
   // MARK: NSCoding
   required init(coder aDecoder: NSCoder) {
@@ -73,6 +76,37 @@ class Item: NSObject, NSCoding {
     aCoder.encode(Int(majorValue), forKey: ItemConstant.majorKey)
     aCoder.encode(Int(minorValue), forKey: ItemConstant.minorKey)
   }
+    
+    func nameForProximity(_ proximity: CLProximity) -> String {
+        switch proximity {
+        case .unknown:
+            return "Unknown"
+        case .immediate:
+            return "Immediate"
+        case .near:
+            return "Near"
+        case .far:
+            return "Far"
+        }
+    }
+    
+    func locationString() -> String {
+        guard let beacon = beacon else { return "Location: Unknown" }
+        let proximity = nameForProximity(beacon.proximity)
+        let accuracy = String(format: "%.2f", beacon.accuracy)
+        
+        var location = "Location: \(proximity)"
+        if beacon.proximity != .unknown {
+            location += " (approx. \(accuracy)m)"
+        }
+        
+        return location
+    }
   
 }
 
+func ==(item: Item, beacon: CLBeacon) -> Bool { // Compares Item and Beacon: a CLBeacon is equal to an Item if the UUID, major, and minor values are all equal
+    return ((beacon.proximityUUID.uuidString == item.uuid.uuidString)
+        && (Int(beacon.major) == Int(item.majorValue))
+        && (Int(beacon.minor) == Int(item.minorValue)))
+}

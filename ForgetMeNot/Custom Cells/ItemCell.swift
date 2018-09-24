@@ -34,6 +34,8 @@ class ItemCell: UITableViewCell {
         imgIcon.image = Icons(rawValue: item.icon)?.image()
         lblName.text = item.name
         
+        lblLocation.text = item.locationString()
+        
       } else {
         imgIcon.image = nil
         lblName.text = ""
@@ -42,6 +44,7 @@ class ItemCell: UITableViewCell {
     }
   }
   
-  func refreshLocation() {
+  func refreshLocation() { // Called each time the locationManager ranges the beacon
+    lblLocation.text = item?.locationString() ?? ""
   }
 }
