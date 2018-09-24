@@ -21,13 +21,14 @@
  */
 
 import Foundation
+import CoreLocation
 
 struct ItemConstant {
   static let nameKey = "name"
   static let iconKey = "icon"
   static let uuidKey = "uuid"
-  static let majorKey = "major"
-  static let minorKey = "minor"
+    let majorValue: CLBeaconMajorValue
+    let minorValue: CLBeaconMinorValue
 }
 
 class Item: NSObject, NSCoding {
@@ -37,13 +38,13 @@ class Item: NSObject, NSCoding {
   let majorValue: UInt16
   let minorValue: UInt16
   
-  init(name: String, icon: Int, uuid: UUID, majorValue: Int, minorValue: Int) {
-    self.name = name
-    self.icon = icon
-    self.uuid = uuid
-    self.majorValue = UInt16(majorValue)
-    self.minorValue = UInt16(minorValue)
-  }
+    init(name: String, icon: Int, uuid: UUID, majorValue: Int, minorValue: Int) {
+        self.name = name
+        self.icon = icon
+        self.uuid = uuid
+        self.majorValue = CLBeaconMajorValue(majorValue)
+        self.minorValue = CLBeaconMinorValue(minorValue)
+    }
 
   // MARK: NSCoding
   required init(coder aDecoder: NSCoder) {
