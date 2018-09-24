@@ -21,20 +21,24 @@
  */
 
 import UIKit
+import CoreLocation
 
 let storedItemsKey = "storedItems"
 
 class ItemsViewController: UIViewController {
-	
+	let locationManager = CLLocationManager() // Use CLLocationManager instance as your entry point into Core Location
+    
   @IBOutlet weak var tableView: UITableView!
   
   var items = [Item]()
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    loadItems()
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        locationManager.requestAlwaysAuthorization()
+        
+        loadItems()
+    }
   
   func loadItems() {
     guard let storedItems = UserDefaults.standard.array(forKey: storedItemsKey) as? [Data] else { return }
