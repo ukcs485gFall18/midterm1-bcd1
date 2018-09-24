@@ -34,6 +34,12 @@ class ItemsViewController: UIViewController {
         locationManager.startRangingBeacons(in: beaconRegion)
     }
     
+    func stopMonitoringItem(_ item: Item) { // Reverses the effects of startMonitoringItem(_:)
+        let beaconRegion = item.asBeaconRegion()
+        locationManager.stopMonitoring(for: beaconRegion)
+        locationManager.stopRangingBeacons(in: beaconRegion)
+    }
+    
   @IBOutlet weak var tableView: UITableView!
   
   var items = [Item]()
