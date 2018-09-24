@@ -59,6 +59,7 @@ class ItemsViewController: UIViewController {
       guard let item = NSKeyedUnarchiver.unarchiveObject(with: itemData) as? Item else { continue }
       items.append(item)
       
+        startMonitoringItem(item)
     }
   }
   
@@ -89,6 +90,7 @@ extension ItemsViewController: AddBeacon {
     tableView.insertRows(at: [newIndexPath], with: .automatic)
     tableView.endUpdates()
     
+    startMonitoringItem(item)
     persistItems()
   }
 }
@@ -118,6 +120,7 @@ extension ItemsViewController : UITableViewDataSource {
       tableView.deleteRows(at: [indexPath], with: .automatic)
       tableView.endUpdates()
       
+        stopMonitoringItem(items[indexPath.row])
       persistItems()
     }
   }
