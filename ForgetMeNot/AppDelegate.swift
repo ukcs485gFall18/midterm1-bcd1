@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   let locationManager = CLLocationManager()
   
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     locationManager.delegate = self
     
     // Request permission to send notifications
@@ -50,7 +50,7 @@ extension AppDelegate: CLLocationManagerDelegate {
     let content = UNMutableNotificationContent()
     content.title = "Forget Me Not"
     content.body = "Are you forgetting something?"
-    content.sound = .default()
+    content.sound = .default
     
     let request = UNNotificationRequest(identifier: "ForgetMeNot", content: content, trigger: nil)
     UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)

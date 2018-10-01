@@ -72,12 +72,16 @@ class ItemsViewController: UIViewController {
     locationManager.stopRangingBeacons(in: beaconRegion)
   }
   
+    //This is the Add Item button
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "segueAdd", let viewController = segue.destination as? AddItemViewController {
       viewController.delegate = self
-    }
+    }/*
+    else if segue.identifier == "segueCalendar", let viewController = segue.destination as? CalendarViewController {
+        //viewController.delegate = self
+        viewController.viewWillAppear(false);
+    }*/
   }
-  
 }
 
 extension ItemsViewController: AddBeacon {
@@ -111,7 +115,7 @@ extension ItemsViewController : UITableViewDataSource {
     return true
   }
   
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     
     if editingStyle == .delete {
       stopMonitoringItem(items[indexPath.row])
