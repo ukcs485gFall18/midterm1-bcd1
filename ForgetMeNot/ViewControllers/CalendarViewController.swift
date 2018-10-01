@@ -4,21 +4,34 @@
 //  Created by David Mercado on 9/30/18.
 //
 //  This file was created by David Mercado and it is used to make a calendar
+//  Could not get my initial idea to work so just commented out all of the work and
+//  deleted parts of the story board that could interfere with the compliation of the app
+//  The work around is setting up a button that when pressed calls the external calendar app.
+//  Will revisit the calendar idea, if not capable of using apple's calendar app internally
+//  with our app we will have to switch to reminders for the schuduling of this app.
+//  A good refrence for this idea is: https://www.raywenderlich.com/2291-eventkit-tutorial-making-a-calendar-reminder
+//
+//Reference: https://www.andrewcbancroft.com/2015/05/14/beginners-guide-to-eventkit-in-swift-requesting-permission/
 //Reference: https://github.com/andrewcbancroft/EventTracker/blob/ask-for-permission/EventTracker/ViewController.swift
+//Reference: https://www.youtube.com/watch?v=ES69XgBDgeo&feature=youtu.be
+//-------------------------------------------------------------------------------------------
 
+
+/*
 import UIKit
 import EventKit
-//import CoreLocation
+import Foundation
 
 class CalendarViewController: UIViewController/*, UITableViewDataSource, UITableViewDelegate*/ {
     
     //var eventStore : EKEventStore = EKEventStore()
     
-    @IBOutlet weak var needPermissionView: UIView!
-    @IBOutlet weak var calendarsTableView: UITableView!
+    //@IBOutlet weak var needPermissionView: UIView!
+    //@IBOutlet weak var calendarsTableView: UITableView!
     
     //var calendars: [EKCalendar]?
     //var calendar: EKCalendar?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +41,13 @@ class CalendarViewController: UIViewController/*, UITableViewDataSource, UITable
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapButton))
         self.navigationItem.rightBarButtonItem = doneButton
         
-        UIApplication.shared.openURL(NSURL(string: "calshow://")! as URL)
+        //UIApplication.shared.openURL(NSURL(string: "calshow://")! as URL)
     }
     @objc func tapButton(){
         print("YOu tapped!!")
     }
-    /*
+    
+    
     //Bool function that checks for calendar authorization----------------------------------
     override func viewWillAppear(_ animated: Bool) {
         checkCalendarAuthorizationStatus()
@@ -138,10 +152,22 @@ class CalendarViewController: UIViewController/*, UITableViewDataSource, UITable
         return cell
     }
     
-
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2 // This was put in mainly for my own unit testing
     }
-*/
  }
+ 
+ //------------------------------------------------------------------------------------------
+ extension UIView {
+ func fadeIn(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+ UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
+ self.alpha = 1.0
+ }, completion: completion)  }
+ 
+ func fadeOut(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
+ UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
+ self.alpha = 0.0
+ }, completion: completion)
+ }
+ }
+*/

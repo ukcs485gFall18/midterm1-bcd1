@@ -28,7 +28,8 @@ let storedItemsKey = "storedItems"
 class ItemsViewController: UIViewController {
 	
   @IBOutlet weak var tableView: UITableView!
-  
+  @IBOutlet weak var calendarButton: UIButton!      //David Mercado added this
+    
   var items = [Item]()
   let locationManager = CLLocationManager()
   
@@ -41,6 +42,11 @@ class ItemsViewController: UIViewController {
     loadItems()
   }
   
+    //David Mercado added this
+    @IBAction func calendarButtonTapped(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: "calshow://")! as URL)
+    }
+    
   func loadItems() {
     guard let storedItems = UserDefaults.standard.array(forKey: storedItemsKey) as? [Data] else { return }
     for itemData in storedItems {
@@ -76,11 +82,7 @@ class ItemsViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "segueAdd", let viewController = segue.destination as? AddItemViewController {
       viewController.delegate = self
-    }/*
-    else if segue.identifier == "segueCalendar", let viewController = segue.destination as? CalendarViewController {
-        //viewController.delegate = self
-        viewController.viewWillAppear(false);
-    }*/
+    }
   }
 }
 
@@ -177,4 +179,3 @@ extension ItemsViewController: CLLocationManagerDelegate {
     
   }
 }
-

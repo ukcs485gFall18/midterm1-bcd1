@@ -115,7 +115,7 @@
                                     <color key="titleColor" red="0.1084953173995018" green="0.46072936058044434" blue="0.73895782232284546" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="hiF-2o-9RR" kind="show" identifier="segueCalendar" id="y97-vJ-rJJ"/>
+                                    <action selector="calendarButtonTapped:" destination="DrD-we-v90" eventType="touchUpInside" id="cTn-dg-WCq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -140,88 +140,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calendarButton" destination="o8f-vW-q7y" id="plv-g0-MSt"/>
                         <outlet property="tableView" destination="xmN-h3-Bwd" id="haf-xt-BAc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ffh-FL-nqd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1115.625" y="1135.5633802816901"/>
-        </scene>
-        <!--Calendar View Controller-->
-        <scene sceneID="Uit-Up-QO2">
-            <objects>
-                <viewController id="POX-gd-alM" userLabel="Calendar View Controller" customClass="CalendarViewController" customModule="ForgetMeNot" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yN0-TK-6iU"/>
-                        <viewControllerLayoutGuide type="bottom" id="iE2-Sn-MyD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="icY-cD-9C6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qwf-Wt-0PQ" userLabel="NeedPermissionView" customClass="needPermissionView">
-                                <rect key="frame" x="0.0" y="200" width="320" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ka-Oh-hgo">
-                                <rect key="frame" x="101" y="283" width="119" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="8Ka-Oh-hgo" secondAttribute="height" multiplier="7:2" id="fnk-Mn-6wN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Go To Settings"/>
-                                <connections>
-                                    <action selector="goToSettingsButtonTapped:" destination="POX-gd-alM" eventType="touchUpInside" id="ZAb-EU-ZxE"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uJ2-dD-Cjj" userLabel="calendarsTableView">
-                                <rect key="frame" x="0.0" y="70" width="320" height="498"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicCell" textLabel="W9X-jh-15P" style="IBUITableViewCellStyleDefault" id="9LL-uB-npI">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9LL-uB-npI" id="IpT-D3-WeW">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W9X-jh-15P">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="POX-gd-alM" id="AO9-ah-kdT"/>
-                                    <outlet property="delegate" destination="POX-gd-alM" id="Z1P-92-FVh"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="uJ2-dD-Cjj" firstAttribute="width" secondItem="icY-cD-9C6" secondAttribute="width" id="Lhy-gJ-3pg"/>
-                            <constraint firstItem="uJ2-dD-Cjj" firstAttribute="centerX" secondItem="icY-cD-9C6" secondAttribute="centerX" id="av5-Bw-St7"/>
-                            <constraint firstItem="uJ2-dD-Cjj" firstAttribute="top" secondItem="yN0-TK-6iU" secondAttribute="bottom" constant="8" id="bjn-Cw-QjF"/>
-                            <constraint firstItem="8Ka-Oh-hgo" firstAttribute="centerX" secondItem="icY-cD-9C6" secondAttribute="centerX" id="ckr-2X-mkO"/>
-                            <constraint firstItem="8Ka-Oh-hgo" firstAttribute="centerY" secondItem="icY-cD-9C6" secondAttribute="centerY" id="rMM-4S-pf6"/>
-                            <constraint firstItem="uJ2-dD-Cjj" firstAttribute="centerY" secondItem="icY-cD-9C6" secondAttribute="centerY" id="zVN-Ck-m4L"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Calendar" id="PfN-wg-fyk"/>
-                    <connections>
-                        <outlet property="calendarsTableView" destination="uJ2-dD-Cjj" id="8pb-Lu-O0L"/>
-                        <outlet property="needPermissionView" destination="Qwf-Wt-0PQ" id="aHb-JA-lWc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hQR-OD-E1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2113.125" y="1871.8309859154929"/>
         </scene>
         <!--Add Item View Controller-->
         <scene sceneID="fwi-Ra-wgU">
@@ -478,24 +403,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15b-rk-kGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1875" y="1135.5633802816901"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="CGR-YR-qVf">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hiF-2o-9RR" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lcV-GQ-ynN">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="POX-gd-alM" kind="relationship" relationship="rootViewController" id="g62-Re-57k"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kit-Gx-cQP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1115.625" y="1871.8309859154929"/>
         </scene>
     </scenes>
     <resources>
