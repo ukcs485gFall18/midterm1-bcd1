@@ -118,6 +118,13 @@
                                     <action selector="calendarButtonTapped:" destination="DrD-we-v90" eventType="touchUpInside" id="cTn-dg-WCq"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Check-in?" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gFI-E1-xck">
+                                <rect key="frame" x="191" y="148" width="105" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -141,6 +148,7 @@
                     </view>
                     <connections>
                         <outlet property="calendarButton" destination="o8f-vW-q7y" id="plv-g0-MSt"/>
+                        <outlet property="checkInLabel" destination="gFI-E1-xck" id="wFJ-fJ-ADC"/>
                         <outlet property="tableView" destination="xmN-h3-Bwd" id="haf-xt-BAc"/>
                     </connections>
                 </viewController>

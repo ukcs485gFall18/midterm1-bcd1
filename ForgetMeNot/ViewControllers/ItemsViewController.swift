@@ -29,6 +29,7 @@ class ItemsViewController: UIViewController {
 	
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var calendarButton: UIButton!      //David Mercado added this
+    @IBOutlet weak var checkInLabel: UITextField!
     
   var items = [Item]()
   let locationManager = CLLocationManager()
@@ -164,6 +165,23 @@ extension ItemsViewController: CLLocationManagerDelegate {
         if items[row] == beacon {
           items[row].beacon = beacon
           indexPaths += [IndexPath(row: row, section: 0)]
+            
+            // Blake Sweet's Beacon detection range
+            // Citation: https://developer.apple.com/documentation/corelocation/determining_the_proximity_to_an_ibeacon
+            // Output if found beacon
+            let nearestBeacon = beacons.first!
+            let major = CLBeaconMajorValue(truncating: nearestBeacon.major)
+            let minor = CLBeaconMinorValue(truncating: nearestBeacon.minor)
+            switch nearestBeacon.proximity {
+                case .near, .immediate:
+                    print ("Checked in ✅ with: \nUUID: \(nearestBeacon.proximityUUID) \nMajor: \(major)\nMinor: \(minor)\n")
+                    self.checkInLabel.text = "Checked in ✅" // Add an icon to show Beacon was found
+                    break
+                default:
+                    print("iBeacon out of range!")
+                    self.checkInLabel.text = "❌"
+                    break
+            }
         }
       }
     }
