@@ -1,4 +1,4 @@
-# midterm1-bcd1
+# Midterm Program
 midterm1-bcd1 created by GitHub Classroom
 
 Using the following tutorial link as a baseline program: 
