@@ -156,6 +156,25 @@
             </objects>
             <point key="canvasLocation" x="1115.625" y="1135.5633802816901"/>
         </scene>
+        <!--Transmitting Beacon-->
+        <scene sceneID="aeP-Tc-JXm">
+            <objects>
+                <viewController title="Transmitting Beacon" id="FpO-Yd-8fG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="39g-kO-Suh"/>
+                        <viewControllerLayoutGuide type="bottom" id="Scm-jd-IhB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="b5m-7O-ojm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mHZ-Hu-d7n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1874" y="1848"/>
+        </scene>
         <!--Add Item View Controller-->
         <scene sceneID="fwi-Ra-wgU">
             <objects>
@@ -411,6 +430,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15b-rk-kGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1875" y="1135.5633802816901"/>
+        </scene>
+        <!--Select User Type Controller-->
+        <scene sceneID="ZWa-WS-eac">
+            <objects>
+                <viewController id="KpU-aC-nOC" userLabel="Select User Type Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="a2M-li-CSs"/>
+                        <viewControllerLayoutGuide type="bottom" id="0cz-6t-d2Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Tk5-Ow-GYb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZc-oJ-4ZY">
+                                <rect key="frame" x="16" y="100" width="343" height="178"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="30"/>
+                                <state key="normal" title="Customer" backgroundImage="BackgroundBlue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Utk-Xi-fQf">
+                                <rect key="frame" x="16" y="301" width="343" height="178"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Restaurant Staff" backgroundImage="LineGrey"/>
+                                <connections>
+                                    <segue destination="DrD-we-v90" kind="show" id="nV7-iR-wCO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dfi-5c-baP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1462" y="365"/>
         </scene>
     </scenes>
     <resources>
