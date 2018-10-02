@@ -193,17 +193,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LZ-Yx-lGl">
-                                <rect key="frame" x="2" y="11" width="60" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lkz-d8-Ung">
+                                <rect key="frame" x="16" y="28" width="60" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="🔙"/>
                                 <connections>
-                                    <segue destination="DrD-we-v90" kind="show" id="d8K-CR-U1H"/>
+                                    <segue destination="DrD-we-v90" kind="show" id="5jl-MT-set"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.44313725490196076" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                     </view>
                 </viewController>
@@ -479,8 +479,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Utk-Xi-fQf">
+                                <rect key="frame" x="16" y="372" width="343" height="178"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Restaurant Staff" backgroundImage="LineGrey"/>
+                                <connections>
+                                    <segue destination="DrD-we-v90" kind="show" id="nV7-iR-wCO"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZc-oJ-4ZY">
-                                <rect key="frame" x="16" y="100" width="343" height="178"/>
+                                <rect key="frame" x="16" y="130" width="343" height="178"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="30"/>
                                 <state key="normal" title="Customer" backgroundImage="BackgroundBlue">
@@ -488,15 +497,6 @@
                                 </state>
                                 <connections>
                                     <segue destination="GIR-nr-DvM" kind="show" id="ovA-Zp-J6E"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Utk-Xi-fQf">
-                                <rect key="frame" x="16" y="301" width="343" height="178"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Restaurant Staff" backgroundImage="LineGrey"/>
-                                <connections>
-                                    <segue destination="DrD-we-v90" kind="show" id="nV7-iR-wCO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -533,13 +533,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWm-2h-eAz">
-                                <rect key="frame" x="39" y="26" width="60" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hPQ-q4-gym">
+                                <rect key="frame" x="13" y="22" width="60" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="🔙"/>
                                 <connections>
-                                    <segue destination="KpU-aC-nOC" kind="show" id="Oi8-bY-sZe"/>
+                                    <segue destination="KpU-aC-nOC" kind="show" id="LJ6-Pg-bkC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -563,7 +563,7 @@
         <image name="Splash" width="284" height="519"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Oi8-bY-sZe"/>
-        <segue reference="nV7-iR-wCO"/>
+        <segue reference="LJ6-Pg-bkC"/>
+        <segue reference="5jl-MT-set"/>
     </inferredMetricsTieBreakers>
 </document>
