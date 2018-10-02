@@ -174,7 +174,6 @@ extension ItemsViewController: CLLocationManagerDelegate {
             switch nearestBeacon.proximity {
                 case .near, .immediate:
                     print ("Checked in ✅ with: \nUUID: \(nearestBeacon.proximityUUID) \nMajor: \(major)\nMinor: \(minor)\n")
-                    //self.checkInLabel.text = "Checked" // Add an icon to show Beacon was found
                     break
                 default:
                     print("iBeacon out of range!")
@@ -193,6 +192,16 @@ extension ItemsViewController: CLLocationManagerDelegate {
         cell.refreshLocation()
       }
     }
+    
+    // Update Check-in Status
+    if let visibleRows = tableView.indexPathsForVisibleRows {
+        let rowsToUpdate = visibleRows.filter { indexPaths.contains($0) }
+        for row in rowsToUpdate {
+            let cell = tableView.cellForRow(at: row) as! ItemCell
+            cell.checkedIn()
+        }
+    }
+    
     
   }
 }

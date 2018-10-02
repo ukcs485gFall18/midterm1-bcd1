@@ -35,6 +35,7 @@ class ItemCell: UITableViewCell {
         imgIcon.image = Icons(rawValue: item.icon)?.image()
         lblName.text = item.name
         lblLocation.text = item.locationString()
+        checkInLabel.text = "Check in Status: ❌"
       } else {
         imgIcon.image = nil
         lblName.text = ""
@@ -46,4 +47,8 @@ class ItemCell: UITableViewCell {
   func refreshLocation() {
     lblLocation.text = item?.locationString() ?? ""
   }
+    
+    func checkedIn() {
+        checkInLabel.text = "Check in Status: ✅"
+    }
 }
