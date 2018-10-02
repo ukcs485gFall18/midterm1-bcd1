@@ -12,5 +12,5 @@ According to Owen L Brown, the writer of the iBeacon tutorial said, ​“​An 
 
 The utilization of a Bluetooth signal is what makes this very powerful at close ranges, compared to a GPS signal. Typically iBeacon is a secondary tiny external piece of hardware that acts like a reciever. Owen said, “If you don’t have an iBeacon but have a second iOS device, you might be able to use it as a beacon.”
 
-#Tutorial Link
+# Tutorial Link
 https://www.raywenderlich.com/632-ibeacon-tutorial-with-ios-and-swift
