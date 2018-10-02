@@ -27,7 +27,8 @@ class ItemCell: UITableViewCell {
   @IBOutlet weak var imgIcon: UIImageView!
   @IBOutlet weak var lblName: UILabel!
   @IBOutlet weak var lblLocation: UILabel!
-  
+    @IBOutlet weak var checkInLabel: UILabel!
+    
   var item: Item? = nil {
     didSet {
       if let item = item {

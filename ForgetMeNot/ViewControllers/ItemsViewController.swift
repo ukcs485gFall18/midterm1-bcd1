@@ -28,7 +28,8 @@ let storedItemsKey = "storedItems"
 class ItemsViewController: UIViewController {
 	
   @IBOutlet weak var tableView: UITableView!
-  
+  @IBOutlet weak var calendarButton: UIButton!      //David Mercado added this
+    
   var items = [Item]()
   let locationManager = CLLocationManager()
   
@@ -41,6 +42,11 @@ class ItemsViewController: UIViewController {
     loadItems()
   }
   
+    //David Mercado added this
+    @IBAction func calendarButtonTapped(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: "calshow://")! as URL)
+    }
+    
   func loadItems() {
     guard let storedItems = UserDefaults.standard.array(forKey: storedItemsKey) as? [Data] else { return }
     for itemData in storedItems {
@@ -72,12 +78,12 @@ class ItemsViewController: UIViewController {
     locationManager.stopRangingBeacons(in: beaconRegion)
   }
   
+    //This is the Add Item button
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "segueAdd", let viewController = segue.destination as? AddItemViewController {
       viewController.delegate = self
     }
   }
-  
 }
 
 extension ItemsViewController: AddBeacon {
@@ -111,7 +117,7 @@ extension ItemsViewController : UITableViewDataSource {
     return true
   }
   
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     
     if editingStyle == .delete {
       stopMonitoringItem(items[indexPath.row])
@@ -158,6 +164,23 @@ extension ItemsViewController: CLLocationManagerDelegate {
         if items[row] == beacon {
           items[row].beacon = beacon
           indexPaths += [IndexPath(row: row, section: 0)]
+            
+            // Blake Sweet's Beacon detection range
+            // Citation: https://developer.apple.com/documentation/corelocation/determining_the_proximity_to_an_ibeacon
+            // Output if found beacon
+            let nearestBeacon = beacons.first!
+            let major = CLBeaconMajorValue(truncating: nearestBeacon.major)
+            let minor = CLBeaconMinorValue(truncating: nearestBeacon.minor)
+            switch nearestBeacon.proximity {
+                case .near, .immediate:
+                    print ("Checked in ✅ with: \nUUID: \(nearestBeacon.proximityUUID) \nMajor: \(major)\nMinor: \(minor)\n")
+                    //self.checkInLabel.text = "Checked" // Add an icon to show Beacon was found
+                    break
+                default:
+                    print("iBeacon out of range!")
+                    //self.checkInLabel.text = "❌"
+                    break
+            }
         }
       }
     }
@@ -173,4 +196,3 @@ extension ItemsViewController: CLLocationManagerDelegate {
     
   }
 }
-
