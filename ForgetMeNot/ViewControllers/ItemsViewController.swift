@@ -193,7 +193,7 @@ extension ItemsViewController: CLLocationManagerDelegate {
       }
     }
     
-    // Update Check-in Status
+    // Update Check-in Status : Blake
     if let visibleRows = tableView.indexPathsForVisibleRows {
         let rowsToUpdate = visibleRows.filter { indexPaths.contains($0) }
         for row in rowsToUpdate {
